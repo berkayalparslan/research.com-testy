@@ -30,17 +30,17 @@ export default defineConfig({
       "STRAPI-CF-ACCESS-CLIENT-SECRET": process.env
         .STRAPI_CF_ACCESS_CLIENT_SECRET as string,
     },
-    headless: false,
+    headless: true,
   },
 
   /* Configure projects for major browsers */
   projects: [
-    {
-      name: "chromium",
-      use: {
-        ...devices["Desktop Chrome"],
-      },
-    },
+    // {
+    //   name: "chromium",
+    //   use: {
+    //     ...devices["Desktop Chrome"],
+    //   },
+    // },
     {
       name: "firefox",
       use: {
