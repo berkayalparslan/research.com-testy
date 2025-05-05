@@ -21,4 +21,24 @@ rankingCategories.forEach(({ testName, category, discipline, country, expectedRa
       await expect(scientificRankingsPage.page.url()).toContain(expectedUrl);
     });
   })
+
+  test("should navigate to best online colleges rankings for each state", async ({
+    page
+  }) => {
+    const statesListElements = page.locator('div > p').filter({hasText: 'UNIVERSITIES & COLLEGES BY STATE'}).locator('+h2').locator('+ul li a');
+    const allStates = await statesListElements.all();
+
+    for(const state of allStates) {
+      const stateName = await state.textContent();
+      const stateLinkHref = await state.getAttribute('href');
+      await state.click();
+
+      await expect(page.locator('.blog-post h1')).toContainText(`2024 Best Online Colleges Programs Ranking in ${stateName}`);
+      await expect(page.url()).toContain(stateLinkHref);
+
+      await page.goBack();
+    }
+  })
+
+
 });
